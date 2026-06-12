@@ -17,6 +17,13 @@ sys_exit(void)
 }
 
 uint64
+sys_procinfo(void)
+{
+  procinfo();
+  return 0;
+}
+
+uint64
 sys_getpid(void)
 {
   return myproc()->pid;
