@@ -89,6 +89,20 @@ myproc(void)
   return p;
 }
 
+
+void
+procinfo(void)
+{
+  struct proc *p = myproc();
+  struct proc *parent = p->parent;
+  
+  printf("%s: [%d]\n", p->name, p->pid);
+  printf("\tState: %d\n", p->state);
+  printf("\t%d bytes\n", p->sz);
+  printf("\tParent : [%d]\n", parent->pid);
+  printf("\t\tState : %d\n", parent->state);
+}
+
 int
 allocpid()
 {
