@@ -145,7 +145,6 @@ UPROGS=\
 	$U/_logstress\
 	$U/_forphan\
 	$U/_dorphan\
-	$U/_printname\
 	$U/_create_proc\
 
 fs.img: mkfs/mkfs README $(UPROGS)
