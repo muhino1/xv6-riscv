@@ -98,7 +98,7 @@ procinfo(void)
   
   printf("%s: [%d]\n", p->name, p->pid);
   printf("\tState: %d\n", p->state);
-  printf("\t%d bytes\n", p->sz);
+  printf("\t%d bytes\n", (int)p->sz);
   printf("\tParent : [%d]\n", parent->pid);
   printf("\t\tState : %d\n", parent->state);
 }
