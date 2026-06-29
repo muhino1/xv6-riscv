@@ -17,6 +17,13 @@ sys_exit(void)
 }
 
 uint64
+sys_rude(void)
+{
+  rude();
+  retrun 0;
+}
+
+uint64
 sys_getpid(void)
 {
   return myproc()->pid;
