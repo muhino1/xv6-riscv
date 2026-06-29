@@ -102,6 +102,11 @@ allocpid()
   return pid;
 }
 
+void
+rude(void){
+  
+};
+
 // Look in the process table for an UNUSED proc.
 // If found, initialize state required to run in the kernel,
 // and return with p->lock held.
@@ -124,6 +129,7 @@ allocproc(void)
 found:
   p->pid = allocpid();
   p->state = USED;
+  p->rudeness = 10;
 
   // Allocate a trapframe page.
   if ((p->trapframe = (struct trapframe *)kalloc()) == 0) {
