@@ -102,10 +102,11 @@ allocpid()
   return pid;
 }
 
-void
-rude(void){
-  
-};
+uint64
+rude(int r)
+{
+  myproc()->rudeness = r;
+}
 
 // Look in the process table for an UNUSED proc.
 // If found, initialize state required to run in the kernel,
