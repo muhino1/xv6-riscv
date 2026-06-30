@@ -5,6 +5,9 @@
 #include "spinlock.h"
 #include "proc.h"
 #include "defs.h"
+extern int current_quantum;
+
+int current_quantum = 1000000; // default
 
 struct cpu cpus[NCPU];
 
@@ -469,6 +472,7 @@ scheduler(void)
     if(p->state == RUNNABLE){
       p->state = RUNNING;
       c->proc = p;
+      current_quantum = p->ticksAllowed * 1000000; 
       swtch(&c->context, &p->context);
       c->proc = 0;
       found = 1;
