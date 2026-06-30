@@ -105,7 +105,7 @@ allocpid()
   return pid;
 }
 
-uint64
+void
 rude(int r)
 {
   myproc()->rudeness = r;
