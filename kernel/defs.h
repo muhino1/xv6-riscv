@@ -9,6 +9,7 @@ struct spinlock;
 struct sleeplock;
 struct stat;
 struct superblock;
+extern int current_quantum;
 
 // bio.c
 void            binit(void);
