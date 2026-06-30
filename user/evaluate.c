@@ -10,7 +10,7 @@ int* arr;
 
 int main(void)
 {
-    int forkpids[3]; 
+    //int forkpids[3]; 
 	
 	//Populate array
 	arr = malloc(sizeof(int)*ARR_SIZE);
@@ -68,7 +68,7 @@ int main(void)
             printf("Child %d (rudeness %d) turnaround: %d ticks\n", i, rudeness[i], my_end - my_start);
             exit(0);
         } else {
-            forkpids[i] = pid;
+            //forkpids[i] = pid;
         }
     }
 
