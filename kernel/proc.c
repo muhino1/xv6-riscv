@@ -5,7 +5,6 @@
 #include "spinlock.h"
 #include "proc.h"
 #include "defs.h"
-extern int current_quantum;
 
 int current_quantum = 1000000; // default
 
