@@ -19,8 +19,10 @@ sys_exit(void)
 uint64
 sys_rude(void)
 {
-  rude();
-  retrun 0;
+  int r;
+  argint(0, &r);
+  rude(r);
+  return 0;
 }
 
 uint64
