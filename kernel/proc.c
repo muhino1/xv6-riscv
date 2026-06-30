@@ -444,10 +444,39 @@ scheduler(void)
     intr_on();
     intr_off();
 
+    int R = 0;
+    int T = 50;
     int found = 0;
     for (p = proc; p < &proc[NPROC]; p++) {
       acquire(&p->lock);
+      if (p->state == RUNNABLE || p->state == RUNNING) {
+        R += p->rudeness;   // running sum of rudeness
+      }
+      release(&p->lock);
+    }
+    
+    for(p = proc; p < &proc[NPROC]; p++) {
+      acquire(&p->lock);
       if (p->state == RUNNABLE) {
+        p->ticksAllowed = (p->rudeness * T) / R;
+        p->ticksUsed = 0;
+      }
+      release(&p->lock);
+    }
+
+    for(p = proc; p < &proc[NPROC]; p++){
+    acquire(&p->lock);
+    if(p->state == RUNNABLE){
+      p->state = RUNNING;
+      c->proc = p;
+      swtch(&c->context, &p->context);
+      c->proc = 0;
+      found = 1;
+    }
+    release(&p->lock);
+  }
+      
+      /*if (p->state == RUNNABLE) {
         // Switch to chosen process.  It is the process's job
         // to release its lock and then reacquire it
         // before jumping back to us.
@@ -461,7 +490,7 @@ scheduler(void)
         found = 1;
       }
       release(&p->lock);
-    }
+    }*/
     if (found == 0) {
       // nothing to run; stop running on this core until an interrupt.
       asm volatile("wfi");
