@@ -10,9 +10,9 @@ int* arr;
 
 int main(void)
 {
-    int forkpids[3]; 
+    //int forkpids[3]; 
     int rudeness[3] = {5, 15, 30};
-    int start_ticks[3], end_ticks[3];
+    //int start_ticks[3], end_ticks[3];
 	
 	//Populate array
 	arr = malloc(sizeof(int)*ARR_SIZE);
@@ -70,7 +70,7 @@ int main(void)
             printf("Child %d (rudeness %d) turnaround: %d ticks\n", i, rudeness[i], my_end - my_start);
             exit(0);
         } else {
-            forkpids[i] = pid;
+            //forkpids[i] = pid;
         }
     }
 
