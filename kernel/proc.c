@@ -447,7 +447,7 @@ scheduler(void)
     intr_on();
     intr_off();
 
-    /* int R = 0;
+    int R = 0;
     int T = 50;
     int found = 0;
     for (p = proc; p < &proc[NPROC]; p++) {
@@ -478,8 +478,10 @@ scheduler(void)
       found = 1;
     }
     release(&p->lock);
-  } */
-      int found = 0;
+  }
+     
+    
+      /*int found = 0;
       for ( p = proc; p < &proc[NPROC]; p++) {
         acquire(&p->lock);
       if (p->state == RUNNABLE) {
@@ -496,7 +498,7 @@ scheduler(void)
         found = 1;
       }
       release(&p->lock);
-    }
+    } */
     if (found == 0) {
       // nothing to run; stop running on this core until an interrupt.
       asm volatile("wfi");
