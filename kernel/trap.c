@@ -82,9 +82,13 @@ usertrap(void)
     kexit(-1);
 
   // give up the CPU if this is a timer interrupt.
-  if (which_dev == 2)
-    yield();
-
+  if (which_dev == 2){
+    struct proc *p = myproc();
+    p->ticksUsed++;
+    if(p->ticksUsed >= p->ticksAllowed)
+      yield();
+  }
+    
   prepare_return();
 
   // the user page table to switch to, for trampoline.S
@@ -154,8 +158,12 @@ kerneltrap()
   }
 
   // give up the CPU if this is a timer interrupt.
-  if (which_dev == 2 && myproc() != 0)
-    yield();
+  if (which_dev == 2 && myproc() != 0){
+    struct proc *p = myproc();
+    p->ticksUsed++;
+    if(p->ticksUsed >= p->ticksAllowed)
+      yield();
+    }
 
   // the yield() may have caused some traps to occur,
   // so restore trap registers for use by kernelvec.S's sepc instruction.
@@ -176,7 +184,7 @@ clockintr()
   // ask for the next timer interrupt. this also clears
   // the interrupt request. 1000000 is about a tenth
   // of a second.
-  w_stimecmp(r_time() + current_quantum);
+  w_stimecmp(r_time() + 1000000);
 }
 
 // check if it's an external interrupt or software interrupt,
