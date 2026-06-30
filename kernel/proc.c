@@ -471,7 +471,6 @@ scheduler(void)
     if(p->state == RUNNABLE){
       p->state = RUNNING;
       c->proc = p;
-      current_quantum = p->ticksAllowed * 1000000; 
       swtch(&c->context, &p->context);
       c->proc = 0;
       found = 1;
